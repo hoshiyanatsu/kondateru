@@ -1,0 +1,44 @@
+  h3 {
+    margin: 30px auto;
+    text-align: center;
+  }
+  .search-form {
+    background-color: #FFC692;
+    padding-top: 5%;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .popular-block {
+    background-color: #FFD8D8;
+    width: 90%;
+    margin: 10% auto;
+    padding-top: 4%;
+    padding-bottom: 7%;
+  }
+  .recent-block {
+    background-color: #C6FFE3;
+    width: 90%;
+    margin: 10% auto;
+    padding-top: 4%;
+    padding-bottom: 7%;
+  }
+  .meal {
+    width: 80%;
+    margin: 5% auto;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 5%;
+  }
+  .meal a {
+    text-decoration: none;
+    color: #000;
+  }  
+  .meal a:hover {
+    text-decoration: underline;
+  }
+  .time {
+    display: flex;
+    justify-content: flex-end;
+  }
+  

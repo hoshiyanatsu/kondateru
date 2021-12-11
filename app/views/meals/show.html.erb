@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>献立る</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/show.scss">
+  </head>
+<div class="meal-show">
+<div class="meal">
+  <p><h3><%= @meal.name %></h3></p>
+  <p><%= image_tag @meal.image_url, size: "250x200" if @meal.image? %></p>
+  <p>・気分&#009;<%= @meal.feeling %></p>
+  <p>・食材&#009;<%= @meal.ingredient %></p>
+  <p>・時間帯&#009;<%= @meal.time %></p>
+  <p>・ジャンル&#009;<%= @meal.kinds %></p>
+  <p>・ポジション&#009;<%= @meal.dish %></p>
+  <% if user_signed_in? %>
+      <% if current_user.already_liked?(@meal) %>
+          <%= link_to meal_like_path(@meal), method: :delete do %>
+            <p><i class="fas fa-heart"></i><%= @meal.likes.count %></p>
+          <% end %>
+      <% else %>
+          <%= link_to meal_likes_path(@meal), method: :post do %>
+            <p><i class="far fa-heart"></i><%= @meal.likes.count %></p>
+          <% end %>
+      <% end %>
+  <% else %>
+    <i class="far fa-heart"></i><%= @meal.likes.count %>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= form_with(model: [@meal, @comment], local: true) do |f| %>
+      <p><%= f.text_area :content %></p>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if user_signed_in? && current_user.id == @meal.user_id %>
+    <%= link_to edit_meal_path(@meal.id) do %>
+      <i class="fas fa-edit"></i>編集する
+    <% end %>
+    <%= link_to meal_path(@meal.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+      <i class="fas fa-trash-alt"></i>削除する
+    <% end %>
+  <% end %>
+  <p class="time">
+  作成日<%= @meal.created_at.to_s(:datetime_jp) %>
+  更新日<%= @meal.updated_at.to_s(:datetime_jp) %></p>
+</div>
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+    <% if c.user.avatar? %>
+      <%= image_tag c.user.avatar_url, class: 'icon' unless c.user.blank? %>
+    <% else %>
+      <%= image_tag ("peach.png"), size: "100×100", class: 'icon' %>
+    <% end %>
+    <p><%= c.user.name unless c.user.name.blank? %></p>
+    <p><%= c.content %><p>
+    <p class="time"><%= c.created_at.to_s(:datetime_jp) %></p>
+  </div>
+  <% end %>
+  
+</div>
+</div>
+</html>

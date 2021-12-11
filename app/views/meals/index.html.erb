@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>献立る</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/index.scss">
+  </head>
+<body>
+<div class="search-form">
+<i class="fas fa-utensils"></i>
+<h3>献立る</h3>
+  <%= search_form_for @q, url: search_meals_path do |f| %>
+    <p><%= f.label :feeling_eq, 'feeling' %></p>
+　  <%= f.radio_button :feeling_eq, '', {:checked => true} %>指定なし
+    <%= f.radio_button :feeling_eq, 'ガッツリ' %>ガッツリ
+    <%= f.radio_button :feeling_eq, 'あっさり' %>あっさり
+    <%= f.radio_button :feeling_eq, 'チル' %>チル
+    <%= f.radio_button :feeling_eq, 'あたたまる' %>あたたまる
+
+    <p><%= f.label :ingredient_eq, 'ingredient' %></p>
+    　  <%= f.radio_button :ingredient_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :ingredient_eq, '肉' %>肉
+        <%= f.radio_button :ingredient_eq, '魚' %>魚
+        <%= f.radio_button :ingredient_eq, '野菜' %>野菜
+
+    <p><%= f.label :time_eq, 'time' %></p>
+    　  <%= f.radio_button :time_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :time_eq, '朝' %>朝
+        <%= f.radio_button :time_eq, '昼' %>昼
+        <%= f.radio_button :time_eq, '夜' %>夜
+        <%= f.radio_button :time_eq, 'いつでも' %>いつでも
+
+    <p><%= f.label :kinds_eq, 'kind' %></p>
+    　  <%= f.radio_button :kinds_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :kinds_eq, '和' %>和
+        <%= f.radio_button :kinds_eq, '洋' %>洋
+        <%= f.radio_button :kinds_eq, '中' %>中
+
+    <p><%= f.label :dish_eq, 'dish' %></p>
+    　  <%= f.radio_button :dish_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :dish_eq, '主菜' %>主菜
+        <%= f.radio_button :dish_eq, '副菜' %>副菜
+        <%= f.radio_button :dish_eq, '汁物' %>汁物
+        <%= f.radio_button :dish_eq, '主食' %>主食
+
+    <p><%= f.submit "この条件で献立る" %></p>
+  <% end %>
+  </div>
+  <p id="ranking"></p>
+  <div class="popular-block">
+  <p><h3><i class="fas fa-award"></i>人気の献立<i class="fas fa-award"></i></h3></p>
+  <% last_like = 0 %>
+  <% j = 1 %>
+  <% @meals_like.each.with_index(1) do |t,i| %>
+    <% if i == 1 %>
+        <% last_like = t.likes.count %>
+    <% end %>
+    <% if t.likes.count != last_like %>
+        <% j = i %>
+    <%= link_to meal_path(t.id) do %>
+    <div class="meal">
+        <div class="meals-container">
+            <div class="left-container">
+            第<%= j %>位
+            <%= t.name %>
+            <%= image_tag t.image_url, size: "250x200" if t.image? %>
+            </div>
+            <div class="right-container">
+            <% if user_signed_in? %>
+                <% if current_user.already_liked?(t) %>
+                    <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
+                        <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% else %>
+                    <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
+                        <i class="far fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% end %>
+            <% else %>
+                <i class="far fa-heart"></i><%= t.likes.count %>
+            <% end %>
+            <% if user_signed_in? && current_user.id == t.user_id %>
+                <i class="fas fa-feather"></i>
+                <%= link_to "編集する", edit_meal_path(t.id) %>
+            <% end %>
+            </div>
+        </div>
+        <p class="time">
+        作成日<%= t.created_at.to_s(:datetime_jp) %>
+        更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+    </div>
+    <% end %>
+    <% else %>
+        <% last_like = t.likes.count %>
+    <%= link_to meal_path(t.id) do %>
+    <div class="meal">
+        <div class="main-box">
+            <div class="left-container">
+            第<%= j %>位
+            <%= t.name %>
+            <%= image_tag t.image_url, size: "250x200" if t.image? %>
+            </div>
+            <div class="right-container">
+            <% if user_signed_in? %>
+                <% if current_user.already_liked?(t) %>
+                    <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
+                        <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% else %>
+                    <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
+                        <i class="far fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% end %>
+            <% else %>
+                <i class="far fa-heart"></i><%= t.likes.count %>
+            <% end %>
+            <% if user_signed_in? && current_user.id == t.user_id %>
+                <i class="fas fa-feather"></i>
+            <% end %>
+            </div>
+        </div>
+        <p class="time">
+        作成日<%= t.created_at.to_s(:datetime_jp) %>
+        更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+    </div>
+    <% end %>
+    <% end %>
+  <% end %>
+  </div>
+  <p id="recent"></p>
+  <div class="recent-block">
+  <h3><i class="far fa-star"></i>最近投稿された料理<i class="far fa-star"></i></h3>
+  <% @meals.each do |t| %>
+    <%= link_to meal_path(t.id) do %>
+    <div class="meal">
+        <div class="left-container">
+        <p>
+        <% if user_signed_in? && current_user.id == t.user_id %>
+            <i class="fas fa-feather"></i>
+        <% end %>
+        <%= t.name %></p>
+        <p><%= image_tag t.image_url, size: "250x200" if t.image? %></p>
+        </div>
+        <div class="right-container">
+            <% if user_signed_in? %>
+                <% if current_user.already_liked?(t) %>
+                    <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
+                        <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% else %>
+                    <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
+                        <i class="far fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% end %>
+            <% else %>
+                <i class="far fa-heart"></i><%= t.likes.count %>
+            <% end %>
+            
+        </div>
+        <p class="time">
+        作成日<%= t.created_at.to_s(:datetime_jp) %>
+        更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+
+</body>
+</html>

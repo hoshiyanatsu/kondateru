@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>献立る</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+    <h1>献立る</h1>
+    <div class="header-list">
+      <ul>
+        <li><%= link_to "メインページへ", meals_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "マイページへ", user_path(current_user.id) %></li>
+        <% else %>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <% end %>
+      </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <div class="top-btn">
+      <a href="#">
+      <i class="fas fa-chevron-circle-up"></i>ページ上部へ
+      </a>
+    </div>
+    <div class="under-menu-box">
+      <ul>
+      <div class="under-menu">
+        <% if user_signed_in? %>
+          <li><a href="/meals/new">献立を増やす</a></li>
+        <% else %>
+          <li><a href="/users/sign_in">献立を増やす</a></li>
+        <% end %>
+      </div>
+      <div class="under-menu">
+        <li><a href="/meals#ranking">人気の献立</a></li>
+      </div>
+      <div class="under-menu">
+        <li><a href="/meals#recent">最近の献立</a></li>
+      </div>
+      </ul>
+    </div>
+    <footer>
+      <p>Copyright ©️ GeekSalon All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

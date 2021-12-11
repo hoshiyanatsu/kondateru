@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>献立る</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/new.scss">
+  </head>
+<body>
+<div class="post-container">
+    <p class="title"></p>
+    <%= form_for(@meal, :url => { controller:'meals', action:'create'})do |f| %>
+    <%= f.label :料理名 %>
+        <br>
+         <%= f.text_field :name, :size => 140 %>
+        <br>
+    <%= f.label :写真 %>
+    <%= f.file_field :image %>
+    <br>
+    <h4>どんな時に食べる？</h4>
+    <%= f.radio_button :feeling, '', {:checked => true} %>指定なし
+    <%= f.radio_button :feeling, :ガッツリ %>ガッツリ
+    <%= f.radio_button :feeling, :あっさり %>あっさり
+    <%= f.radio_button :feeling, :チル %>チル
+    <%= f.radio_button :feeling, :あたたまる %>あたたまる
+    <br>
+    <h4>主に使う食材は？</h4>
+    <%= f.radio_button :ingredient, '', {:checked => true} %>指定なし
+    <%= f.radio_button :ingredient, :肉 %>肉
+    <%= f.radio_button :ingredient, :魚 %>魚
+    <%= f.radio_button :ingredient, :野菜 %>野菜
+    <h4>いつ食べる？</h4>
+    <%= f.radio_button :time, '', {:checked => true} %>指定なし
+    <%= f.radio_button :time, :朝 %>朝
+    <%= f.radio_button :time, :昼 %>昼
+    <%= f.radio_button :time, :夜 %>夜
+    <%= f.radio_button :time, :いつでも %>いつでも
+    <h4>ジャンルは？</h4>
+    <%= f.radio_button :kinds, '', {:checked => true} %>指定なし
+    <%= f.radio_button :kinds, :和 %>和
+    <%= f.radio_button :kinds, :洋 %>洋
+    <%= f.radio_button :kinds, :中 %>中
+    <h4>ポジションは？</h4>
+    <%= f.radio_button :dish, '', {:checked => true} %>指定なし
+    <%= f.radio_button :dish, :主菜 %>主菜
+    <%= f.radio_button :dish, :副菜 %>副菜
+    <%= f.radio_button :dish, :汁物 %>汁物
+    <%= f.radio_button :dish, :主食 %>主食
+    <br>
+    <%= f.submit "献立を増やす" %>
+    <br>
+    <% end %>
+</div>
+</body>
+</html>

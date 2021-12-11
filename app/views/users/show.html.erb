@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>献立る</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/show.scss">
+  </head>
+  
+<body>
+<div class="user-profile">
+<h2>プロフィール</h2>
+<% if @user.avatar? %>
+  <%= image_tag @user.avatar_url, class: 'icon' %>
+<% else %>
+  <%= image_tag ("peach.png"), size: "100×100", class: 'icon' %>
+<% end %>
+<p>名前 : <%= @user.name %></p>
+<p>メールアドレス : <%= @user.email %></p>
+<p>プロフィール : <%= @user.profile %></p>
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path %>
+  <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<% end %>
+<div class="menu">
+  <ul>
+  <li><a href="#userpost">投稿した料理</a></li>
+  <li><a href="#userlike">いいねした料理</a></li>
+  <li><a href="#usercomment">コメントした料理</a></li>
+  </ul>
+</div>
+</div>
+<p id="userpost"></p>
+<div class="user-post-meals">
+<h2>投稿した料理</h2>
+<% @user.meals.order("id DESC").each do |usm| %>
+  <%= link_to meal_path(usm.id) do %>
+  <div class="meal">
+  <p><h3><%= usm.name %></h3></p>
+  <p><%= image_tag usm.image_url, size: "250x200" if usm.image? %></p>
+  <%= link_to meal_path(usm.id) do %>
+  <i class="fas fa-info-circle"></i>詳細ページへ
+  <% end %>
+  <%= link_to edit_meal_path(usm.id) do %>
+  <i class="fas fa-edit"></i>編集する
+  <% end %>
+  <%= link_to meal_path(usm.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+  <i class="fas fa-trash-alt"></i>削除する
+  <% end %>
+  <p class="time">
+  作成日<%= usm.created_at.to_s(:datetime_jp) %>
+  更新日<%= usm.updated_at.to_s(:datetime_jp) %></p>
+  </div>
+  <% end %>
+<% end %>
+</div>
+<p id="userlike"></p>
+<div class="user-like-meals">
+<h2>いいねした料理</h2>
+<% @user.liked_meals.each do |like| %>
+  <%= link_to meal_path(like.id) do %>
+  <div class="meal">
+  <p><h3><%= like.name %></h3></p>
+  <p><%= image_tag like.image_url, size: "250x200" if like.image? %></p>
+  <% if user_signed_in? %>
+    <% if current_user.already_liked?(like) %>
+      <%= link_to meal_like_path(id: like.id, meal_id: like.id), method: :delete do %>
+        <i class="fas fa-heart"></i><%= like.likes.count %>
+      <% end %>
+    <% else %>
+      <%= link_to meal_likes_path(id: like.id, meal_id: like.id), method: :post do %>
+        <i class="far fa-heart"></i><%= like.likes.count %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <i class="far fa-heart"></i><%= like.likes.count %>
+  <% end %>
+  <%= link_to meal_path(like.id) do %>
+  <i class="fas fa-info-circle"></i>詳細ページへ
+  <% end %>
+  <p class="time">
+  作成日<%= like.created_at.to_s(:datetime_jp) %>
+  更新日<%= like.updated_at.to_s(:datetime_jp) %></p>
+  </div>
+  <% end %>
+<% end %>
+</div>
+<p id="usercomment"></p>
+<div class="comment-wrapper">
+<h2>コメントした料理</h2>
+<% @user.comments.each do |c| %>
+  <%= link_to meal_path(c.meal.id) do %>
+  <div class="meal">
+  <p><h3><%= c.meal.name %></h3></p>
+  <p><%= image_tag c.meal.image_url, size: "250x200" if c.meal.image? %></p>
+  <%= link_to meal_path(c.meal.id) do %>
+    <i class="fas fa-info-circle"></i>詳細ページへ
+  <% end %>
+  <p class="time">
+  作成日<%= c.meal.created_at.to_s(:datetime_jp) %>
+  更新日<%= c.meal.updated_at.to_s(:datetime_jp) %></p>
+  <p><%= c.content %></p>
+  </div>
+  <% end %>
+<% end %>
+</div>
+
+</body>
+</html>
