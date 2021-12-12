@@ -16,15 +16,18 @@
     <div class="header-list">
       <ul>
         <%= link_to meals_path do %>
-          <li><i class="fas fa-home"></i></li>
+          <span>ホーム</span>
+          <li><i class="fas fa-home fa-lg"></i></li>
         <% end %>
         <% if user_signed_in? %>
           <%= link_to user_path(current_user.id) do %>
-            <li><i class="fas fa-smile"></i></li>
+            <span>マイページ</span>
+            <li><i class="fas fa-smile fa-lg"></i></li>
           <% end %>
         <% else %>
           <%= link_to new_user_session_path do%>
-          <li><i class="fas fa-sign-in-alt"></i></li>
+            <span>ログイン</span>
+            <li><i class="fas fa-sign-in-alt fa-lg"></i></li>
           <% end %>
         <% end %>
       </ul>
@@ -40,19 +43,17 @@
     </div>
     <div class="under-menu-box">
       <ul>
-      <div class="under-menu">
         <% if user_signed_in? %>
-          <li><a href="/meals/new">献立を増やす</a></li>
+          <li><a href="/meals/new"><span>献立を増やす</span>
+          <p><i class="fas fa-search-plus fa-lg"></p></i></a></li>
         <% else %>
-          <li><a href="/users/sign_in">献立を増やす</a></li>
+          <li><a href="/users/sign_in"><span>献立を増やす</span>
+          <p><i class="fas fa-search-plus fa-lg"></p></i></a></li>
         <% end %>
-      </div>
-      <div class="under-menu">
-        <li><a href="/meals#ranking">人気の献立</a></li>
-      </div>
-      <div class="under-menu">
-        <li><a href="/meals#recent">最近の献立</a></li>
-      </div>
+        <li><a href="/meals#ranking"><span>人気の献立</span>
+        <p><i class="fas fa-fire-alt fa-lg"></p></i></a></li>
+        <li><a href="/meals#recent"><span>最近の献立</span>
+        <p><i class="fas fa-thumbtack fa-lg"></p></i></a></li>
       </ul>
     </div>
     <footer>
