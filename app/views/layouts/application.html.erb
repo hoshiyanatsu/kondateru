@@ -15,11 +15,17 @@
     <h1>献立る</h1>
     <div class="header-list">
       <ul>
-        <li><%= link_to "メインページへ", meals_path %></li>
+        <%= link_to meals_path do %>
+          <li><i class="fas fa-home"></i></li>
+        <% end %>
         <% if user_signed_in? %>
-          <li><%= link_to "マイページへ", user_path(current_user.id) %></li>
+          <%= link_to user_path(current_user.id) do %>
+            <li><i class="fas fa-smile"></i></li>
+          <% end %>
         <% else %>
-          <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <%= link_to new_user_session_path do%>
+          <li><i class="fas fa-sign-in-alt"></i></li>
+          <% end %>
         <% end %>
       </ul>
       </div>
