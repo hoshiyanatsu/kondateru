@@ -44,8 +44,9 @@
     <% end %>
   <% end %>
   <p class="time">
-  作成日<%= @meal.created_at.to_s(:datetime_jp) %>
-  更新日<%= @meal.updated_at.to_s(:datetime_jp) %></p>
+  <p>作成日<%= @meal.created_at.to_s(:datetime_jp) %></p>
+  <p>更新日<%= @meal.updated_at.to_s(:datetime_jp) %></p>
+  </p>
 </div>
 <div class="comment-wrapper">
   <p>コメント一覧</p>
@@ -58,7 +59,12 @@
     <% end %>
     <p><%= c.user.name unless c.user.name.blank? %></p>
     <p><%= c.content %><p>
-    <p class="time"><%= c.created_at.to_s(:datetime_jp) %></p>
+    <% if user_signed_in? && current_user.id == c.user_id %>
+        <p><%= link_to 'このコメントを削除', comment_path(c.id), data: {confirm: '本当に削除しますか？'}, method: :delete %>
+    <% end %>
+    <p class="time">
+    <p><%= c.created_at.to_s(:datetime_jp) %></p>
+    </p>
   </div>
   <% end %>
   

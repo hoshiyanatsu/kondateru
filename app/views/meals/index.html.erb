@@ -57,73 +57,75 @@
     <% end %>
     <% if t.likes.count != last_like %>
         <% j = i %>
-    <%= link_to meal_path(t.id) do %>
-    <div class="meal">
-        <div class="meals-container">
-            <div class="left-container">
-            第<%= j %>位
-            <%= t.name %>
-            <%= image_tag t.image_url, size: "250x200" if t.image? %>
-            </div>
-            <div class="right-container">
-            <% if user_signed_in? %>
-                <% if current_user.already_liked?(t) %>
-                    <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
-                        <i class="fas fa-heart"></i><%= t.likes.count %>
+        <div class="meal">
+        <%= link_to meal_path(t.id) do %>
+            <div class="meals-container">
+                <div class="left-container">
+                第<%= j %>位
+                <%= t.name %>
+                <%= image_tag t.image_url, size: "250x200" if t.image? %>
+                </div>
+                <div class="right-container">
+                <% if user_signed_in? %>
+                    <% if current_user.already_liked?(t) %>
+                        <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
+                            <i class="fas fa-heart"></i><%= t.likes.count %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
+                            <i class="far fa-heart"></i><%= t.likes.count %>
+                        <% end %>
                     <% end %>
                 <% else %>
-                    <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
-                        <i class="far fa-heart"></i><%= t.likes.count %>
-                    <% end %>
+                    <i class="far fa-heart"></i><%= t.likes.count %>
                 <% end %>
-            <% else %>
-                <i class="far fa-heart"></i><%= t.likes.count %>
-            <% end %>
-            <% if user_signed_in? && current_user.id == t.user_id %>
-                <i class="fas fa-feather"></i>
-                <%= link_to "編集する", edit_meal_path(t.id) %>
-            <% end %>
+                <% if user_signed_in? && current_user.id == t.user_id %>
+                    <i class="fas fa-feather"></i>
+                    <%= link_to "編集する", edit_meal_path(t.id) %>
+                <% end %>
+                </div>
             </div>
+            <p class="time">
+            <p>作成日<%= t.created_at.to_s(:datetime_jp) %></p>
+            <p>更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+            </p>
+        <% end %>
         </div>
-        <p class="time">
-        作成日<%= t.created_at.to_s(:datetime_jp) %>
-        更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
-    </div>
-    <% end %>
     <% else %>
         <% last_like = t.likes.count %>
-    <%= link_to meal_path(t.id) do %>
-    <div class="meal">
-        <div class="main-box">
-            <div class="left-container">
-            第<%= j %>位
-            <%= t.name %>
-            <%= image_tag t.image_url, size: "250x200" if t.image? %>
-            </div>
-            <div class="right-container">
-            <% if user_signed_in? %>
-                <% if current_user.already_liked?(t) %>
-                    <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
-                        <i class="fas fa-heart"></i><%= t.likes.count %>
+        <div class="meal">
+        <%= link_to meal_path(t.id) do %>
+            <div class="main-box">
+                <div class="left-container">
+                第<%= j %>位
+                <%= t.name %>
+                <%= image_tag t.image_url, size: "250x200" if t.image? %>
+                </div>
+                <div class="right-container">
+                <% if user_signed_in? %>
+                    <% if current_user.already_liked?(t) %>
+                        <%= link_to meal_like_path(id: t.id, meal_id: t.id), method: :delete do %>
+                            <i class="fas fa-heart"></i><%= t.likes.count %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
+                            <i class="far fa-heart"></i><%= t.likes.count %>
+                        <% end %>
                     <% end %>
                 <% else %>
-                    <%= link_to meal_likes_path(id: t.id, meal_id: t.id), method: :post do %>
-                        <i class="far fa-heart"></i><%= t.likes.count %>
-                    <% end %>
+                    <i class="far fa-heart"></i><%= t.likes.count %>
                 <% end %>
-            <% else %>
-                <i class="far fa-heart"></i><%= t.likes.count %>
-            <% end %>
-            <% if user_signed_in? && current_user.id == t.user_id %>
-                <i class="fas fa-feather"></i>
-            <% end %>
+                <% if user_signed_in? && current_user.id == t.user_id %>
+                    <i class="fas fa-feather"></i>
+                <% end %>
+                </div>
             </div>
+            <p class="time">
+            <p>作成日<%= t.created_at.to_s(:datetime_jp) %></p>
+            <p>更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+            </p>
+        <% end %>
         </div>
-        <p class="time">
-        作成日<%= t.created_at.to_s(:datetime_jp) %>
-        更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
-    </div>
-    <% end %>
     <% end %>
   <% end %>
   </div>
@@ -131,8 +133,8 @@
   <div class="recent-block">
   <h3><i class="far fa-star"></i>最近投稿された料理<i class="far fa-star"></i></h3>
   <% @meals.each do |t| %>
-    <%= link_to meal_path(t.id) do %>
     <div class="meal">
+    <%= link_to meal_path(t.id) do %>
         <div class="left-container">
         <p>
         <% if user_signed_in? && current_user.id == t.user_id %>
@@ -158,10 +160,11 @@
             
         </div>
         <p class="time">
-        作成日<%= t.created_at.to_s(:datetime_jp) %>
-        更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
-    </div>
+        <p>作成日<%= t.created_at.to_s(:datetime_jp) %></p>
+        <p>更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+        </p>
     <% end %>
+    </div>
   <% end %>
   </div>
 
