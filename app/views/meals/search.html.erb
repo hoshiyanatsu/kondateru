@@ -79,8 +79,9 @@
       <% end %>
     <% end %>
     <p class="time">
-    作成日<%= meal.created_at.to_s(:datetime_jp) %>
-    更新日<%= meal.updated_at.to_s(:datetime_jp) %></p>
+    <p>作成日: <%= meal.created_at.to_s(:datetime_jp) %></p>
+    <p>更新日: <%= meal.updated_at.to_s(:datetime_jp) %></p>
+    </p>
     </div>
   </div>
   <% end %>

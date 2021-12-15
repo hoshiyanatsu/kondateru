@@ -11,33 +11,33 @@
 <h3>献立る</h3>
   <%= search_form_for @q, url: search_meals_path do |f| %>
     <p><%= f.label :feeling_eq, 'feeling' %></p>
-　  <%= f.radio_button :feeling_eq, '', {:checked => true} %>指定なし
+    <%= f.radio_button :feeling_eq, '', {:checked => true} %>指定なし
     <%= f.radio_button :feeling_eq, 'ガッツリ' %>ガッツリ
     <%= f.radio_button :feeling_eq, 'あっさり' %>あっさり
     <%= f.radio_button :feeling_eq, 'チル' %>チル
     <%= f.radio_button :feeling_eq, 'あたたまる' %>あたたまる
 
     <p><%= f.label :ingredient_eq, 'ingredient' %></p>
-    　  <%= f.radio_button :ingredient_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :ingredient_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :ingredient_eq, '肉' %>肉
         <%= f.radio_button :ingredient_eq, '魚' %>魚
         <%= f.radio_button :ingredient_eq, '野菜' %>野菜
 
     <p><%= f.label :time_eq, 'time' %></p>
-    　  <%= f.radio_button :time_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :time_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :time_eq, '朝' %>朝
         <%= f.radio_button :time_eq, '昼' %>昼
         <%= f.radio_button :time_eq, '夜' %>夜
         <%= f.radio_button :time_eq, 'いつでも' %>いつでも
 
     <p><%= f.label :kinds_eq, 'kind' %></p>
-    　  <%= f.radio_button :kinds_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :kinds_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :kinds_eq, '和' %>和
         <%= f.radio_button :kinds_eq, '洋' %>洋
         <%= f.radio_button :kinds_eq, '中' %>中
 
     <p><%= f.label :dish_eq, 'dish' %></p>
-    　  <%= f.radio_button :dish_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :dish_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :dish_eq, '主菜' %>主菜
         <%= f.radio_button :dish_eq, '副菜' %>副菜
         <%= f.radio_button :dish_eq, '汁物' %>汁物
@@ -86,8 +86,8 @@
                 </div>
             </div>
             <p class="time">
-            <p>作成日<%= t.created_at.to_s(:datetime_jp) %></p>
-            <p>更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+            <p>作成日: <%= t.created_at.to_s(:datetime_jp) %></p>
+            <p>更新日: <%= t.updated_at.to_s(:datetime_jp) %></p>
             </p>
         <% end %>
         </div>
@@ -121,8 +121,8 @@
                 </div>
             </div>
             <p class="time">
-            <p>作成日<%= t.created_at.to_s(:datetime_jp) %></p>
-            <p>更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+            <p>作成日: <%= t.created_at.to_s(:datetime_jp) %></p>
+            <p>更新日: <%= t.updated_at.to_s(:datetime_jp) %></p>
             </p>
         <% end %>
         </div>
@@ -160,8 +160,8 @@
             
         </div>
         <p class="time">
-        <p>作成日<%= t.created_at.to_s(:datetime_jp) %></p>
-        <p>更新日<%= t.updated_at.to_s(:datetime_jp) %></p>
+        <p>作成日: <%= t.created_at.to_s(:datetime_jp) %></p>
+        <p>更新日: <%= t.updated_at.to_s(:datetime_jp) %></p>
         </p>
     <% end %>
     </div>

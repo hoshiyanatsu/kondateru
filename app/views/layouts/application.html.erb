@@ -44,16 +44,16 @@
     <div class="under-menu-box">
       <ul>
         <% if user_signed_in? %>
-          <li><a href="/meals/new"><span>献立を増やす</span>
-          <p><i class="fas fa-search-plus fa-lg"></p></i></a></li>
+          <li><a href="/meals/new"><p><i class="fas fa-search-plus fa-lg"></i></p>
+          <span>献立を増やす</span></a></li>
         <% else %>
-          <li><a href="/users/sign_in"><span>献立を増やす</span>
-          <p><i class="fas fa-search-plus fa-lg"></p></i></a></li>
+          <li><a href="/users/sign_in"><p><i class="fas fa-search-plus fa-lg"></i></p>
+          <span>献立を増やす</span></a></li>
         <% end %>
-        <li><a href="/meals#ranking"><span>人気の献立</span>
-        <p><i class="fas fa-fire-alt fa-lg"></p></i></a></li>
-        <li><a href="/meals#recent"><span>最近の献立</span>
-        <p><i class="fas fa-thumbtack fa-lg"></p></i></a></li>
+        <li><a href="/meals#ranking"><p><i class="fas fa-fire-alt fa-lg"></i></p>
+        <span>人気の献立</span></a></li>
+        <li><a href="/meals#recent"><p><i class="fas fa-thumbtack fa-lg"></i></p>
+        <span>最近の献立</span></a></li>
       </ul>
     </div>
     <footer>
