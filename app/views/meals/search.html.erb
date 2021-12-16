@@ -8,7 +8,7 @@
 <body>
 <div class="search-meals">
 <h3>おすすめの献立</h3>
-<div class="condition">
+  <div class="condition">
   <% if @results.first %>
   <h4>検索条件</h4>
     <p>気分: 
@@ -45,16 +45,20 @@
     <% end %>
   <% end %>
   <%= link_to "検索条件を変える", meals_path %>
-</div>
-<% @results.each do |meal| %>
-  <%= link_to meal_path(meal.id) do %>
-  <div class="meal">
-    <div class="left-container">
+  </div>
+  <% @results.each do |meal| %>
+    <div class="meals-container">
+    <div class="meal">
       <p><%= meal.name %></p>
       <p><%= image_tag meal.image_url, size: "250x200" if meal.image? %></p>
+      <p class="time">
+      <p>作成日: <%= meal.created_at.to_s(:datetime_jp) %></p>
+      <p>更新日: <%= meal.updated_at.to_s(:datetime_jp) %></p>
+      </p>
+      <a class="link" href="/meals/<%= meal.id %>"></a>
     </div>
-    <div class="right-container">
-    <p><% if user_signed_in? %>
+    <div class="like">
+    <% if user_signed_in? %>
       <% if current_user.already_liked?(meal) %>
         <%= link_to meal_like_path(id: meal.id, meal_id: meal.id), method: :delete do %>
           <i class="fas fa-heart"></i><%= meal.likes.count %>
@@ -66,26 +70,10 @@
       <% end %>
     <% else %>
       <i class="far fa-heart"></i><%= meal.likes.count %>
-    <% end %></p>
-    <%= link_to meal_path(meal.id) do %>
-      <i class="fas fa-info-circle"></i>詳細
     <% end %>
-    <% if user_signed_in? && current_user.id == meal.user_id %>
-      <%= link_to edit_meal_path(meal.id) do %>
-        <i class="fas fa-edit"></i>編集
-      <% end %>
-      <%= link_to meal_path(meal.id), method: :delete do %>
-        <i class="fas fa-trash-alt"></i>削除
-      <% end %>
-    <% end %>
-    <p class="time">
-    <p>作成日: <%= meal.created_at.to_s(:datetime_jp) %></p>
-    <p>更新日: <%= meal.updated_at.to_s(:datetime_jp) %></p>
-    </p>
     </div>
-  </div>
+    </div>
   <% end %>
-<% end %>
 </div>
 </body>
 </html>
