@@ -9,22 +9,37 @@
 <body>
 <div class="user-profile">
 <h2>プロフィール</h2>
-<% if @user.avatar? %>
-  <%= image_tag @user.avatar_url, class: 'icon' %>
-<% else %>
-  <%= image_tag ("peach.png"), size: "100×100", class: 'icon' %>
-<% end %>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
-<% if current_user.id == @user.id %>
-  <%= link_to edit_user_registration_path do %>
-    <p>プロフィールを編集<i class="fas fa-edit"></i></p>
+<div class="user-white-block">
+  <div class="user-logout">
+    <span>ログアウト</span>
+    <% if current_user.id == @user.id %>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <p><i class="fas fa-sign-out-alt fa-lg"></i></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="profile-container">
+    <div class="user-icon">
+    <% if @user.avatar? %>
+      <%= image_tag @user.avatar_url, class: 'icon' %>
+    <% else %>
+      <%= image_tag ("peach.png"), size: "100×100", class: 'icon' %>
+    <% end %>
+    </div>
+    <div class="user-info">
+      <h3><%= @user.name %></h3>
+      <p><%= @user.profile %></p>
+    </div>
+  </div>
+</div>
+<div class="edit-btn">
+  <% if current_user.id == @user.id %>
+    <%= link_to edit_user_registration_path do %>
+      <p>プロフィールを編集<i class="fas fa-edit"></i></p>
+    <% end %>
   <% end %>
-  <%= link_to destroy_user_session_path, method: :delete do %>
-    <p>ログアウト<i class="fas fa-sign-out-alt"></i></p>
-  <% end %>
-<% end %>
+  <a class="link" href="/users/edit" ></a>
+</div>
 <div class="menu">
   <ul>
   <li><a href="#userpost">投稿した料理</a></li>
