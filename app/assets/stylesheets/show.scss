@@ -76,6 +76,28 @@
 }
 .icon {
     border-radius: 50%;
+    border: 2px solid black;
+}
+.meal-detail {
+    display: flex;
+    justify-content: center;
+}
+.detail-title {
+    text-align: left;
+    margin-right: 3%;
+}
+.detail-title p {
+    border-bottom: 3px solid #FFC692;
+}
+.detail-content {
+    text-align: left;
+    margin-left: 3%;
+}
+.detail-content p {
+    border-bottom: 3px solid #FFC692;
+}
+.meal span:hover {
+    text-decoration: underline;
 }
 .user-post-meals {
     width: 90%;
@@ -110,4 +132,39 @@
     background-color: #EADAFF;
     padding-top: 7%;
     padding-bottom: 7%;
+}
+.comment {
+    width: 80%;
+    margin: 5% auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.comment-content {
+    background-color: white;
+    border-radius: 10%;
+    position: relative;
+    display: inline-block;
+    margin: 3% 8% 3% 0;
+    padding: 3% 5%;
+    min-width: 50%;
+    max-width: 100%;
+    font-size: 16px;
+    text-align: left;
+}
+.comment-content:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -15px;
+    border: 15px solid transparent;
+    border-left: 15px solid white;
+}
+.comment-content p {
+    margin: 0;
+    padding: 0;
+}
+.comment-user {
+    right: 0;
 }

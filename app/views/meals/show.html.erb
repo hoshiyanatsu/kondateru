@@ -9,21 +9,32 @@
 <div class="meal">
   <p><h3><%= @meal.name %></h3></p>
   <p><%= image_tag @meal.image_url, size: "250x200" if @meal.image? %></p>
-  <p>・気分&#009;<%= @meal.feeling %></p>
-  <p>・食材&#009;<%= @meal.ingredient %></p>
-  <p>・時間帯&#009;<%= @meal.time %></p>
-  <p>・ジャンル&#009;<%= @meal.kinds %></p>
-  <p>・ポジション&#009;<%= @meal.dish %></p>
+  <div class="meal-detail">
+    <div class="detail-title">
+      <p>気分</p>
+      <p>食材</p>
+      <p>時間帯</p>
+      <p>ジャンル</p>
+      <p>ポジション</p>
+    </div>
+    <div class="detail-content">
+      <p><%= @meal.feeling if @meal.feeling? %><%= '指定なし' unless @meal.feeling? %></p>
+      <p><%= @meal.ingredient if @meal.ingredient?%><%= '指定なし' unless @meal.ingredient? %></p>
+      <p><%= @meal.time if @meal.time? %><%= '指定なし' unless @meal.time? %></p>
+      <p><%= @meal.kinds if @meal.kinds? %><%= '指定なし' unless @meal.kinds? %></p>
+      <p><%= @meal.dish if @meal.dish? %><%= '指定なし' unless @meal.dish? %></p>
+    </div>
+  </div>
   <% if user_signed_in? %>
-      <% if current_user.already_liked?(@meal) %>
-          <%= link_to meal_like_path(@meal), method: :delete do %>
-            <p><i class="fas fa-heart"></i><%= @meal.likes.count %></p>
-          <% end %>
-      <% else %>
-          <%= link_to meal_likes_path(@meal), method: :post do %>
-            <p><i class="far fa-heart"></i><%= @meal.likes.count %></p>
-          <% end %>
-      <% end %>
+    <% if current_user.already_liked?(@meal) %>
+        <%= link_to meal_like_path(@meal), method: :delete do %>
+          <p><i class="fas fa-heart"></i><%= @meal.likes.count %></p>
+        <% end %>
+    <% else %>
+        <%= link_to meal_likes_path(@meal), method: :post do %>
+          <p><i class="far fa-heart"></i><%= @meal.likes.count %></p>
+        <% end %>
+    <% end %>
   <% else %>
     <i class="far fa-heart"></i><%= @meal.likes.count %>
   <% end %>
@@ -37,10 +48,10 @@
   <% end %>
   <% if user_signed_in? && current_user.id == @meal.user_id %>
     <%= link_to edit_meal_path(@meal.id) do %>
-      <i class="fas fa-edit"></i>編集する
+      <span><i class="fas fa-edit"></i>編集する</span>
     <% end %>
     <%= link_to meal_path(@meal.id), method: :delete, data: {confirm: "削除しますか？"} do %>
-      <i class="fas fa-trash-alt"></i>削除する
+      <span><i class="fas fa-trash-alt"></i>削除する</span>
     <% end %>
   <% end %>
   <p class="time">
@@ -51,23 +62,26 @@
 <div class="comment-wrapper">
   <p>コメント一覧</p>
   <% @comments.each do |c| %>
-    <div>
-    <% if c.user.avatar? %>
-      <%= image_tag c.user.avatar_url, class: 'icon' unless c.user.blank? %>
-    <% else %>
-      <%= image_tag ("peach.png"), size: "100×100", class: 'icon' %>
-    <% end %>
-    <p><%= c.user.name unless c.user.name.blank? %></p>
-    <p><%= c.content %><p>
-    <% if user_signed_in? && current_user.id == c.user_id %>
-        <p><%= link_to 'このコメントを削除', comment_path(c.id), data: {confirm: '本当に削除しますか？'}, method: :delete %>
-    <% end %>
-    <p class="time">
-    <p><%= c.created_at.to_s(:datetime_jp) %></p>
-    </p>
-  </div>
+    <div class="comment">
+      <div class="comment-content">
+        <p><%= c.content %><p>
+        <p class="time">
+          <%= c.created_at.to_s(:datetime_jp) %>
+        </p>
+        <% if user_signed_in? && current_user.id == c.user_id %>
+          <p><%= link_to 'このコメントを削除', comment_path(c.id), data: {confirm: '本当に削除しますか？'}, method: :delete %>
+        <% end %>
+      </div>
+      <div class="comment-user">
+        <% if c.user.avatar? %>
+          <%= image_tag c.user.avatar_url, class: 'icon' unless c.user.blank? %>
+        <% else %>
+          <%= image_tag ("knife_and_folk.png"), size: "100x100", class: 'icon' %>
+        <% end %>
+        <p><h4><%= c.user.name unless c.user.name.blank? %></h4></p>
+      </div>
+    </div>
   <% end %>
-  
 </div>
 </div>
 </html>

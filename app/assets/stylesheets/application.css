@@ -59,9 +59,10 @@
   }
   .like a {
     text-decoration: none;
+    color: black;
   }
   .like a:hover {
-    text-decoration: wavy;
+    text-decoration: underline;
   }
   header {
     width: 100%;
@@ -93,6 +94,10 @@
   .header-list {
     display: flex;
     align-items: center;
+  }
+  .header-list li:hover {
+    color: #DDDDDD;
+    opacity: 0.7;
   }
   .header-list span {
     font-size: 30%;
