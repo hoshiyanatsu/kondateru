@@ -11,11 +11,11 @@
   <p><%= image_tag @meal.image_url, size: "250x200" if @meal.image? %></p>
   <div class="meal-detail">
     <div class="detail-title">
-      <p>気分</p>
-      <p>食材</p>
-      <p>時間帯</p>
-      <p>ジャンル</p>
-      <p>ポジション</p>
+      <p><i class="far fa-comment-dots"></i> 気分</p>
+      <p><i class="fas fa-seedling"></i> 食材</p>
+      <p><i class="far fa-clock"></i> 時間帯</p>
+      <p><i class="far fa-calendar-minus"></i> ジャンル</p>
+      <p><i class="fas fa-utensils"></i> ポジション</p>
     </div>
     <div class="detail-content">
       <p><%= @meal.feeling if @meal.feeling? %><%= '指定なし' unless @meal.feeling? %></p>

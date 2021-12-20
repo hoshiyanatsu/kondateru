@@ -107,6 +107,9 @@
     padding-top: 7%;
     padding-bottom: 7%;
 }
+.user-post-meals .meal span:hover {
+    text-decoration: underline;
+}
 .user-like-meals {
     width: 90%;
     margin: 10% auto;
@@ -114,6 +117,9 @@
     background-color: #FFD8D8;
     padding-top: 7%;
     padding-bottom: 7%;
+}
+.user-like-meals .meal span:hover {
+    text-decoration: underline;
 }
 .meal-show {
     width: 90%;
@@ -132,6 +138,9 @@
     background-color: #EADAFF;
     padding-top: 7%;
     padding-bottom: 7%;
+}
+.comment-wrapper .meal span:hover {
+    text-decoration: underline;
 }
 .comment {
     width: 80%;
