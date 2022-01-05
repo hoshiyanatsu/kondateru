@@ -10,40 +10,45 @@
 <i class="fas fa-utensils"></i>
 <h3>献立る</h3>
   <%= search_form_for @q, url: search_meals_path do |f| %>
-    <p><h4><%= f.label :feeling_eq, '気分' %></h4></p>
-    <%= f.radio_button :feeling_eq, '', {:checked => true} %>指定なし
-    <%= f.radio_button :feeling_eq, 'ガッツリ' %>ガッツリ
-    <%= f.radio_button :feeling_eq, 'あっさり' %>あっさり
-    <%= f.radio_button :feeling_eq, 'チル' %>くつろぐ
-    <%= f.radio_button :feeling_eq, 'あたたまる' %>あたたまる
-
-    <p><h4><%= f.label :ingredient_eq, '材料' %></h4></p>
+    <div>
+        <p><h4><%= f.label :feeling_eq, '気分' %></h4></p>
+        <%= f.radio_button :feeling_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :feeling_eq, 'ガッツリ' %>ガッツリ
+        <%= f.radio_button :feeling_eq, 'あっさり' %>あっさり
+        <%= f.radio_button :feeling_eq, 'くつろぐ' %>くつろぐ
+        <%= f.radio_button :feeling_eq, 'あたたまる' %>あたたまる
+    </div>
+    <div>
+        <p><h4><%= f.label :ingredient_eq, '材料' %></h4></p>
         <%= f.radio_button :ingredient_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :ingredient_eq, '肉' %>肉
         <%= f.radio_button :ingredient_eq, '魚' %>魚
         <%= f.radio_button :ingredient_eq, '野菜' %>野菜
         <%= f.radio_button :ingredient_eq, '卵' %>卵
-
-    <p><h4><%= f.label :time_eq, '時間帯' %></h4></p>
+    </div>
+    <div>
+        <p><h4><%= f.label :time_eq, '時間帯' %></h4></p>
         <%= f.radio_button :time_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :time_eq, '朝' %>朝
         <%= f.radio_button :time_eq, '昼' %>昼
         <%= f.radio_button :time_eq, '夜' %>夜
         <%= f.radio_button :time_eq, 'いつでも' %>いつでも
-
-    <p><h4><%= f.label :kinds_eq, '種類' %></h4></p>
+    </div>
+    <div>
+        <p><h4><%= f.label :kinds_eq, '種類' %></h4></p>
         <%= f.radio_button :kinds_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :kinds_eq, '和' %>和
         <%= f.radio_button :kinds_eq, '洋' %>洋
         <%= f.radio_button :kinds_eq, '中' %>中
-
-    <p><h4><%= f.label :dish_eq, 'ポジション' %></h4></p>
+    </div>
+    <div>
+        <p><h4><%= f.label :dish_eq, 'ポジション' %></h4></p>
         <%= f.radio_button :dish_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :dish_eq, '主菜' %>主菜
         <%= f.radio_button :dish_eq, '副菜' %>副菜
         <%= f.radio_button :dish_eq, '汁物' %>汁物
         <%= f.radio_button :dish_eq, '主食' %>主食
-
+    </div>
     <p><%= f.submit "この条件で献立る" %></p>
   <% end %>
   </div>

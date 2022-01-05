@@ -7,6 +7,17 @@
   </head>
   
 <body>
+<div class="hamburger-menu">
+  <input type="checkbox" id="menu-btn-check">
+  <label for="menu-btn-check" class="menu-btn"><span></span></label>
+  <div class="menu-content">
+    <ul>
+      <li><a href="#userpost">投稿した料理</a></li>
+      <li><a href="#userlike">いいねした料理</a></li>
+      <li><a href="#usercomment">コメントした料理</a></li>
+    </ul>
+  </div>
+</div>
 <div class="user-profile">
 <h2>プロフィール</h2>
 <div class="user-white-block">
@@ -39,13 +50,6 @@
     <% end %>
   <% end %>
   <a class="link" href="/users/edit" ></a>
-</div>
-<div class="menu">
-  <ul>
-  <li><a href="#userpost">投稿した料理</a></li>
-  <li><a href="#userlike">いいねした料理</a></li>
-  <li><a href="#usercomment">コメントした料理</a></li>
-  </ul>
 </div>
 </div>
 <p id="userpost"></p>

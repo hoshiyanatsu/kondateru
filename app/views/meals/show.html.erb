@@ -7,8 +7,12 @@
   </head>
 <div class="meal-show">
 <div class="meal">
-  <p><h3><%= @meal.name %></h3></p>
-  <p><%= image_tag @meal.image_url, size: "250x200" if @meal.image? %></p>
+  <p class="mealname"><%= @meal.name %></p>
+  <% if @meal.image? %>
+      <%= image_tag @meal.image_url, size: "250x200" %>
+  <% else %>
+      <%= image_tag ("no_image.png"), size: "250x200" %>
+  <% end %>
   <div class="meal-detail">
     <div class="detail-title">
       <p><i class="far fa-comment-dots"></i> 気分</p>

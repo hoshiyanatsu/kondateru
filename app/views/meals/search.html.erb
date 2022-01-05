@@ -7,36 +7,28 @@
   </head>
 <body>
 <div class="search-meals">
-<h3>おすすめの献立</h3>
+  <h3>おすすめの献立</h3>
   <div class="condition">
   <% if @results.first %>
-  <h4>検索条件</h4>
-    <p>気分: 
-    <% if @results.first.feeling? %>
-      <%= @results.first.feeling %>
-    <% else %>指定なし
-    <% end %></p>
-    <p>食材: 
-    <% if @results.first.ingredient? %>
-      <%= @results.first.ingredient %>
-    <% else %>指定なし
-    <% end %></p>
-    <p>時間帯: 
-    <% if @results.first.time? %>
-      <%= @results.first.time %>
-    <% else %>指定なし
-    <% end %></p>
-    <p>種類: 
-    <% if @results.first.kinds? %>
-      <%= @results.first.kinds %>
-    <% else %>指定なし
-    <% end %></p>
-    <p>ポジション: 
-    <% if @results.first.dish? %>
-      <%= @results.first.dish %>
-    <% else %>指定なし
-    <% end %></p>
+    <h4>検索条件</h4>
+    <div class="meal-detail">
+      <div class="detail-title">
+        <p><i class="far fa-comment-dots"></i> 気分</p>
+        <p><i class="fas fa-seedling"></i> 食材</p>
+        <p><i class="far fa-clock"></i> 時間帯</p>
+        <p><i class="far fa-calendar-minus"></i> ジャンル</p>
+        <p><i class="fas fa-utensils"></i> ポジション</p>
+      </div>
+      <div class="detail-content">
+        <p><%= @results.first.feeling if @results.first.feeling? %><%= '指定なし' unless @results.first.feeling? %></p>
+        <p><%= @results.first.ingredient if @results.first.ingredient?%><%= '指定なし' unless @results.first.ingredient? %></p>
+        <p><%= @results.first.time if @results.first.time? %><%= '指定なし' unless @results.first.time? %></p>
+        <p><%= @results.first.kinds if @results.first.kinds? %><%= '指定なし' unless @results.first.kinds? %></p>
+        <p><%= @results.first.dish if @results.first.dish? %><%= '指定なし' unless @results.first.dish? %></p>
+      </div>
+    </div>
   <% else %>
+    <%= image_tag ("sorry.png"), width: '80%', height: '60%' %>
     <p>条件に合う献立を見つけられませんでした</p>
     <% if user_signed_in? %>
       <p><%= link_to '献立を増やす', new_meal_path %></p>
@@ -71,15 +63,15 @@
     <% if user_signed_in? %>
       <% if current_user.already_liked?(meal) %>
         <%= link_to meal_like_path(id: meal.id, meal_id: meal.id), method: :delete do %>
-          <i class="fas fa-heart"></i><%= meal.likes.count %>
+          <i class="fas fa-heart fa-lg"></i><%= meal.likes.count %>
         <% end %>
       <% else %>
         <%= link_to meal_likes_path(id: meal.id, meal_id: meal.id), method: :post do %>
-          <i class="far fa-heart"></i><%= meal.likes.count %>
+          <i class="far fa-heart fa-lg"></i><%= meal.likes.count %>
         <% end %>
       <% end %>
     <% else %>
-      <i class="far fa-heart"></i><%= meal.likes.count %>
+      <i class="far fa-heart fa-lg"></i><%= meal.likes.count %>
     <% end %>
     </div>
     </div>
