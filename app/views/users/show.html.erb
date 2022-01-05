@@ -52,77 +52,127 @@
 <div class="user-post-meals">
 <h2>投稿した料理</h2>
 <% @user.meals.order("id DESC").each do |usm| %>
-  <%= link_to meal_path(usm.id) do %>
+  <div class="meals-container">
   <div class="meal">
-  <p><h3><%= usm.name %></h3></p>
-  <p><%= image_tag usm.image_url, size: "250x200" if usm.image? %></p>
-  <%= link_to meal_path(usm.id) do %>
-  <span><i class="fas fa-info-circle"></i>詳細ページへ</span>
-  <% end %>
-  <%= link_to edit_meal_path(usm.id) do %>
-  <span><i class="fas fa-edit"></i>編集する</span>
-  <% end %>
-  <%= link_to meal_path(usm.id), method: :delete, data: {confirm: "削除しますか？"} do %>
-  <span><i class="fas fa-trash-alt"></i>削除する</span>
-  <% end %>
-  <p class="time">
-  <p>作成日: <%= usm.created_at.to_s(:datetime_jp) %></p>
-  <p>更新日: <%= usm.updated_at.to_s(:datetime_jp) %></p>
-  </p>
+    <% if user_signed_in? && current_user.id == usm.user_id %>
+      <i class="fas fa-feather"></i>
+    <% end %>
+    <p class="mealname"><%= usm.name %></p>
+    <% if usm.image? %>
+        <%= image_tag usm.image_url, size: "250x200" %>
+    <% else %>
+        <%= image_tag ("no_image.png"), size: "250x200" %>
+    <% end %>
+    <p class="time">
+      <p>作成日: <%= usm.created_at.to_s(:datetime_jp) %></p>
+      <p>更新日: <%= usm.updated_at.to_s(:datetime_jp) %></p>
+    </p>
+    <a class="link" href="/meals/<%= usm.id %>" >
+    <div class="mask">
+        <div class="caption">
+          <%= image_tag ("to_show.png"),  width: '100%', height: '100%' %>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="post-sidemenu">
+    <div class="like">
+      <% if user_signed_in? %>
+          <% if current_user.already_liked?(usm) %>
+              <%= link_to meal_like_path(id: usm.id, meal_id: usm.id), method: :delete do %>
+                  <i class="fas fa-heart fa-lg"></i><span><%= usm.likes.count %></span>
+              <% end %>
+          <% else %>
+              <%= link_to meal_likes_path(id: usm.id, meal_id: usm.id), method: :post do %>
+                  <i class="far fa-heart fa-lg"></i><span><%= usm.likes.count %></span>
+              <% end %>
+          <% end %>
+      <% else %>
+          <i class="far fa-heart fa-lg"></i><span><%= usm.likes.count %></span>
+      <% end %>
+    </div>
+    <div class="edit-icon">
+      <%= link_to edit_meal_path(usm.id) do %>
+        <p><span><i class="fas fa-edit fa-lg"></i>編集</span></p>
+      <% end %>
+    </div>
+    <div class="delete-icon">
+      <%= link_to meal_path(usm.id), method: :delete, data: {confirm: "削除しますか？"} do %>
+        <p><span><i class="fas fa-trash-alt fa-lg"></i>削除</span></p>
+      <% end %>
+    </div>
+  </div>
   </div>
   <% end %>
-<% end %>
 </div>
 <p id="userlike"></p>
 <div class="user-like-meals">
 <h2>いいねした料理</h2>
 <% @user.liked_meals.each do |like| %>
-  <%= link_to meal_path(like.id) do %>
+  <div class="meals-container">
   <div class="meal">
-  <p><h3><%= like.name %></h3></p>
-  <p><%= image_tag like.image_url, size: "250x200" if like.image? %></p>
-  <% if user_signed_in? %>
-    <% if current_user.already_liked?(like) %>
-      <%= link_to meal_like_path(id: like.id, meal_id: like.id), method: :delete do %>
-        <span><i class="fas fa-heart"></i><%= like.likes.count %></span>
-      <% end %>
-    <% else %>
-      <%= link_to meal_likes_path(id: like.id, meal_id: like.id), method: :post do %>
-        <span><i class="far fa-heart"></i><%= like.likes.count %></span>
-      <% end %>
+    <% if user_signed_in? && current_user.id == like.user_id %>
+      <i class="fas fa-feather"></i>
     <% end %>
-  <% else %>
-    <i class="far fa-heart"></i><%= like.likes.count %>
-  <% end %>
-  <%= link_to meal_path(like.id) do %>
-  <span><i class="fas fa-info-circle"></i>詳細ページへ</span>
-  <% end %>
-  <p class="time">
-  <p>作成日: <%= like.created_at.to_s(:datetime_jp) %></p>
-  <p>更新日: <%= like.updated_at.to_s(:datetime_jp) %></p>
-  </p>
+    <p class="mealname"><%= like.name %></p>
+    <% if like.image? %>
+        <%= image_tag like.image_url, size: "250x200" %>
+    <% else %>
+        <%= image_tag ("no_image.png"), size: "250x200" %>
+    <% end %>
+    <p class="time">
+      <p>作成日: <%= like.created_at.to_s(:datetime_jp) %></p>
+      <p>更新日: <%= like.updated_at.to_s(:datetime_jp) %></p>
+    </p>
+    <a class="link" href="/meals/<%= like.id %>" >
+    <div class="mask">
+        <div class="caption">
+          <%= image_tag ("to_show.png"),  width: '100%', height: '100%' %>
+        </div>
+    </div>
+    </a>
   </div>
-  <% end %>
+  <div class="like">
+    <% if user_signed_in? %>
+        <% if current_user.already_liked?(like) %>
+            <%= link_to meal_like_path(id: like.id, meal_id: like.id), method: :delete do %>
+                <i class="fas fa-heart fa-lg"></i><span><%= like.likes.count %></span>
+            <% end %>
+        <% else %>
+            <%= link_to meal_likes_path(id: like.id, meal_id: like.id), method: :post do %>
+                <i class="far fa-heart fa-lg"></i><span><%= like.likes.count %></span>
+            <% end %>
+        <% end %>
+    <% else %>
+        <i class="far fa-heart fa-lg"></i><span><%= like.likes.count %></span>
+    <% end %>
+  </div>
+  </div>
 <% end %>
 </div>
 <p id="usercomment"></p>
 <div class="comment-wrapper">
 <h2>コメントした料理</h2>
 <% @user.comments.each do |c| %>
-  <%= link_to meal_path(c.meal.id) do %>
-  <div class="meal">
-  <p><h3><%= c.meal.name %></h3></p>
-  <p><%= image_tag c.meal.image_url, size: "250x200" if c.meal.image? %></p>
-  <%= link_to meal_path(c.meal.id) do %>
-    <span><i class="fas fa-info-circle"></i>詳細ページへ</span>
-  <% end %>
-  <p class="time">
-  <p>作成日: <%= c.meal.created_at.to_s(:datetime_jp) %></p>
-  <p>更新日: <%= c.meal.updated_at.to_s(:datetime_jp) %></p>
-  </p>
-  <p><%= c.content %></p>
+  <div class="comment">
+    <div class="comment-content">
+      <p><%= c.content %><p>
+      <p class="time">
+        <%= c.created_at.to_s(:datetime_jp) %>
+      </p>
+    </div>
+    <%= link_to meal_path(c.meal.id) do %>
+      <div class="do_comment_meal">
+      <p class="mealname"><%= c.meal.name %></p>
+      <% if c.meal.image? %>
+          <%= image_tag c.meal.image_url, size: "125x100" %>
+      <% else %>
+          <%= image_tag ("no_image.png"), size: "125x100" %>
+      <% end %>
+      <a class="link" href="/meals/<%= c.meal.id %>" ></a>
+      </div>
+    <% end %>
   </div>
-  <% end %>
 <% end %>
 </div>
 

@@ -49,13 +49,23 @@
   <% @results.each do |meal| %>
     <div class="meals-container">
     <div class="meal">
-      <p><%= meal.name %></p>
-      <p><%= image_tag meal.image_url, size: "250x200" if meal.image? %></p>
+      <p class="mealname"><%= meal.name %></p>
+      <% if meal.image? %>
+          <%= image_tag meal.image_url, size: "250x200" %>
+      <% else %>
+          <%= image_tag ("no_image.png"), size: "250x200" %>
+      <% end %>
       <p class="time">
       <p>作成日: <%= meal.created_at.to_s(:datetime_jp) %></p>
       <p>更新日: <%= meal.updated_at.to_s(:datetime_jp) %></p>
       </p>
-      <a class="link" href="/meals/<%= meal.id %>"></a>
+      <a class="link" href="/meals/<%= meal.id %>">
+      <div class="mask">
+        <div class="caption">
+          <%= image_tag ("to_show.png"),  width: '100%', height: '100%' %>
+        </div>
+      </div>
+      </a>
     </div>
     <div class="like">
     <% if user_signed_in? %>

@@ -78,6 +78,7 @@
     border-radius: 50%;
     border: 2px solid black;
 }
+
 .meal-detail {
     display: flex;
     justify-content: center;
@@ -89,6 +90,21 @@
 .detail-title p {
     border-bottom: 3px solid #FFC692;
 }
+.detail-title p:first-child i {
+    color: blue;
+}
+.detail-title p:nth-child(2) i {
+    color: green;
+}
+.detail-title p:nth-child(3) i {
+    color: brown;
+}
+.detail-title p:nth-child(4) i {
+    color: rgb(175, 51, 212);
+}
+.detail-title p:nth-child(5) i {
+    color: rgb(167, 167, 167);
+}
 .detail-content {
     text-align: left;
     margin-left: 3%;
@@ -98,6 +114,105 @@
 }
 .meal span:hover {
     text-decoration: underline;
+}
+.post-sidemenu {
+    margin-right: 2%;
+}
+.like_and_comment {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+.do_like {
+    flex-basis: 120px;
+    margin: 5%;
+}
+.do_like p {
+    background-color: white;
+    margin: 5%;
+}
+.do_like p:first-child {
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 150%;
+    border-radius: 10%;
+    border: 1px solid black;
+}
+.do_like:hover p:first-child {
+    background-color: #ffbeeb;
+}
+.do_like:hover p:nth-child(2) {
+    background-color: rgb(221, 221, 221);
+}
+.do_like p:nth-child(2) {
+    font-size: 90%;
+    border-radius: 5%;
+    border: 0.6px solid black;
+    background-color: rgb(236, 236, 236);
+}
+.do_like a {
+    text-decoration: none;
+    color: black;
+}
+.do_like span {
+    color: black;
+}
+.do_like i {
+    color: red;
+}
+.do_comment {
+    margin: 5%;
+}
+.do_comment_meal {
+    margin: 0 auto;
+    padding: 3%;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 5%;
+    flex-basis: 10%;
+}
+.do_comment_meal a {
+    text-decoration: none;
+    color: black;
+}
+.do_comment_meal:hover {
+    background-color: rgb(238, 238, 238);
+}
+.do_comment_meal .mealname {
+    font-size: 120%;
+    margin: 3%;
+    border: 3px dashed black;
+  }
+.edit-icon {
+    background-color: white;
+    border-radius: 30%;
+    margin-top: 3%;
+}
+.edit-icon:hover {
+    background-color: rgb(162, 187, 255);
+    border: 2px solid blue;
+}
+.edit-icon a {
+    text-decoration: none;
+    color: black;
+}
+.edit-icon i {
+    color: blue;
+}
+.delete-icon {
+    background-color: white;
+    border-radius: 30%;
+    margin-top: 5%;
+}
+.delete-icon:hover {
+    background-color: rgb(146, 146, 146);
+    border: 2px solid red;
+}
+.delete-icon a {
+    text-decoration: none;
+    color: black;
 }
 .user-post-meals {
     width: 90%;
@@ -117,9 +232,6 @@
     background-color: #FFD8D8;
     padding-top: 7%;
     padding-bottom: 7%;
-}
-.user-like-meals .meal span:hover {
-    text-decoration: underline;
 }
 .meal-show {
     width: 90%;
