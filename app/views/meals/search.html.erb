@@ -9,8 +9,7 @@
 <div class="search-meals">
   <h3>おすすめの献立</h3>
   <div class="condition">
-  <% if @results.first %>
-    <h4>検索条件</h4>
+  <h4>検索条件</h4>
     <div class="meal-detail">
       <div class="detail-title">
         <p><i class="far fa-comment-dots"></i> 気分</p>
@@ -20,14 +19,14 @@
         <p><i class="fas fa-utensils"></i> ポジション</p>
       </div>
       <div class="detail-content">
-        <p><%= @results.first.feeling if @results.first.feeling? %><%= '指定なし' unless @results.first.feeling? %></p>
-        <p><%= @results.first.ingredient if @results.first.ingredient?%><%= '指定なし' unless @results.first.ingredient? %></p>
-        <p><%= @results.first.time if @results.first.time? %><%= '指定なし' unless @results.first.time? %></p>
-        <p><%= @results.first.kinds if @results.first.kinds? %><%= '指定なし' unless @results.first.kinds? %></p>
-        <p><%= @results.first.dish if @results.first.dish? %><%= '指定なし' unless @results.first.dish? %></p>
+        <p><%= params[:q][:feeling_eq] unless params[:q][:feeling_eq].empty? %><%= '指定なし' if params[:q][:feeling_eq].empty? %></p>
+        <p><%= params[:q][:ingredient_eq] unless params[:q][:ingredient_eq].empty? %><%= '指定なし' if params[:q][:ingredient_eq].empty? %></p>
+        <p><%= params[:q][:time_eq] unless params[:q][:time_eq].empty? %><%= '指定なし' if params[:q][:time_eq].empty? %></p>
+        <p><%= params[:q][:kinds_eq] unless params[:q][:kinds_eq].empty? %><%= '指定なし' if params[:q][:kinds_eq].empty? %></p>
+        <p><%= params[:q][:dish_eq] unless params[:q][:dish_eq].empty? %><%= '指定なし' if params[:q][:dish_eq].empty? %></p>
       </div>
     </div>
-  <% else %>
+    <% unless @results.first %>
     <%= image_tag ("sorry.png"), width: '80%', height: '60%' %>
     <p>条件に合う献立を見つけられませんでした</p>
     <% if user_signed_in? %>
