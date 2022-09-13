@@ -25,13 +25,19 @@
       Meiryo, "ＭＳ Ｐゴシック", sans-serif;
     margin-top: 10%;
   }
+  .all-meals {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1% auto;
+  }
   .meals-container {
     display: flex;
     align-items: center;
+    margin: 1% 5%;
   }
   .meal {
     position: relative;
-    width: 75%;
+    width: 100%;
     margin: 5% auto;
     padding: 3%;
     text-align: center;
@@ -81,10 +87,12 @@
     bottom: 0;
   }
   .like {
-    margin-right: 3%;
+    margin-left: 3%;
     background-color: white;
     border-radius: 30%;
     margin-top: 3%;
+    display: flex;
+    padding: 3%;
   }
   .like a {
     text-decoration: none;
@@ -92,7 +100,6 @@
   }
   .like:hover {
     background-color: #ffbeeb;
-    border: 2px solid #ffbeeb;
   }
   .like span {
     color: black;

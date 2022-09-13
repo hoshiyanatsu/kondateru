@@ -15,6 +15,15 @@
     width: 90%;
     border-radius: 10%;
   }
+  .form-button {
+    background-color: #ffa149;
+    border-color: #FFC692;
+    color: white;
+    box-shadow: 3px gray;
+  }
+  .form-button:hover {
+    background-color: #feb979;
+  }
   .popular-block {
     background-color: #FFD8D8;
     width: 90%;
