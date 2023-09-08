@@ -23,6 +23,6 @@ terminal or prompt:
    $ rails db:migrate
   ```
 5. ```sh
-  rails s
-  ```
-6. [https://](http://localhost:3000/)http://localhost:3000/にアクセス
+   rails s
+   ```
+6. [https://](http://localhost:3000/) にアクセス
