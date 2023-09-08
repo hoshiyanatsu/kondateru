@@ -25,4 +25,9 @@ terminal or prompt:
 5. ```sh
    rails s
    ```
-6. [https://](http://localhost:3000/) にアクセス
+6. access to [https://localhost:3000](http://localhost:3000/)
+## エラーが出た場合
+* webpacker関係
+1. [参考記事①](https://qiita.com/ginger-yell/items/8584e9149496940ea144)
+2. [参考記事②](https://qiita.com/Uchibori/items/2f754b370fbbda34a09e)のrails webpacker:compileまでを実行
+3. 再度 ```$ rails s```
