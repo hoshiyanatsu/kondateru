@@ -21,7 +21,7 @@ terminal or prompt:
 4. ```sh
    $ rails db:create
    $ rails db:migrate
-  ```
+   ```
 5. ```sh
    rails s
    ```
